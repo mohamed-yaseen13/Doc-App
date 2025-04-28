@@ -7,16 +7,22 @@ class AppCustomTextFormField extends StatelessWidget {
   final String hintText;
   final Widget? suffixIcon;
   final bool? isObscureText;
+  final TextEditingController? controller;
+  final Function(String?) validator;
+
   const AppCustomTextFormField({
     super.key,
     required this.hintText,
     this.suffixIcon,
     this.isObscureText,
+    this.controller,
+    required this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         isDense: true,
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
@@ -30,6 +36,9 @@ class AppCustomTextFormField extends StatelessWidget {
       ),
       obscureText: isObscureText ?? false,
       style: AppTextStyles.font14Grey500Weight,
+      validator: (value) {
+        return validator(value);
+      },
     );
   }
 

@@ -11,6 +11,9 @@ analyzer:
   errors:
     unused_local_variable: ignore
     non_constant_identifier_names: ignore
+    unused_element: ignore
+    unused_element_parameter: ignore
+    unnecessary_to_list_in_spreads: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

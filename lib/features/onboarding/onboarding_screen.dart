@@ -1,4 +1,6 @@
+import 'package:doc_app/core/helpers/extensions.dart';
 import 'package:doc_app/core/helpers/spacing.dart';
+import 'package:doc_app/core/routing/app_routes.dart';
 import 'package:doc_app/core/theming/app_text_styles.dart';
 import 'package:doc_app/core/widgets/app_custom_button.dart';
 import 'package:doc_app/features/onboarding/widgets/big_logo_and_image.dart';
@@ -32,7 +34,12 @@ class OnboardingScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       verticalSpace(32),
-                      const AppCustomButton(textButton: 'Get Started'),
+                      AppCustomButton(
+                        textButton: 'Get Started',
+                        onPresssed: () {
+                          context.pushNamed(AppRoutes.loginScreen);
+                        },
+                      ),
                     ],
                   ),
                 ),
