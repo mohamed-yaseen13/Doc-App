@@ -1,17 +1,16 @@
 import 'package:doc_app/core/helpers/spacing.dart';
 import 'package:doc_app/core/theming/app_text_styles.dart';
-import 'package:doc_app/features/home/data/models/home_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpecialityItem extends StatelessWidget {
   final String iconAsset;
-  final SpecializationsData? specializationsData;
+  final String? specializationName;
 
   const SpecialityItem({
     super.key,
     required this.iconAsset,
-    required this.specializationsData,
+    required this.specializationName,
   });
 
   @override
@@ -25,7 +24,7 @@ class SpecialityItem extends StatelessWidget {
           Image.asset(iconAsset),
           verticalSpace(8),
           Text(
-            specializationsData?.name ?? 'Specialization',
+            specializationName ?? '',
             style: AppTextStyles.font12Grey500Weight,
           ),
         ],

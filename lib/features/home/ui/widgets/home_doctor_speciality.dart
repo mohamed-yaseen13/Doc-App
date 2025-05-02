@@ -41,7 +41,7 @@ class HomeDoctorSpeciality extends StatelessWidget {
                   children: [
                     SpecialityItem(
                       iconAsset: 'assets/images/speciality_general.png',
-                      specializationsData: specializationDataList[index],
+                      specializationName: specializationDataList[index]?.name,
                     ),
                   ],
                 );
