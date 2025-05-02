@@ -1,7 +1,6 @@
 import 'package:doc_app/features/home/ui/widgets/home_blue_stack.dart';
-import 'package:doc_app/features/home/ui/widgets/home_doctor_speciality.dart';
 import 'package:doc_app/features/home/ui/widgets/home_nav_bar.dart';
-import 'package:doc_app/features/home/ui/widgets/home_recommendation_doctors.dart';
+import 'package:doc_app/features/home/ui/widgets/speciality_and_recommendation_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,11 +16,10 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 30.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                HomeNavBar(),
-                HomeBlueStack(),
-                HomeDoctorSpeciality(),
-                HomeRecommendationDoctors(),
+              children: [
+                const HomeNavBar(),
+                const HomeBlueStack(),
+                const SpecialityAndRecommendationBlocBuilder(),
               ],
             ),
           ),

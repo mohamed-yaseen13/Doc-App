@@ -1,10 +1,12 @@
 import 'package:doc_app/core/theming/app_text_styles.dart';
+import 'package:doc_app/features/home/data/models/home_response_model.dart';
 import 'package:doc_app/features/home/ui/widgets/speciality_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeDoctorSpeciality extends StatelessWidget {
-  const HomeDoctorSpeciality({super.key});
+  final List<SpecializationsData?> specializationDataList;
+  const HomeDoctorSpeciality({super.key, required this.specializationDataList});
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +32,20 @@ class HomeDoctorSpeciality extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 120,
-            child: ListView(
+            height: 170.h,
+            child: ListView.builder(
+              itemCount: specializationDataList.length,
               scrollDirection: Axis.horizontal,
-              children: [
-                SpecialityItem(
-                  iconAsset: 'assets/images/speciality_general.png',
-                  label: 'General',
-                ),
-                SpecialityItem(
-                  iconAsset: 'assets/images/speciality_neurologic.png',
-                  label: 'Neurologic',
-                ),
-                SpecialityItem(
-                  iconAsset: 'assets/images/speciality_pediatric.png',
-                  label: 'Pediatric',
-                ),
-                SpecialityItem(
-                  iconAsset: 'assets/images/speciality_radiology.png',
-                  label: 'Radiology',
-                ),
-              ],
+              itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    SpecialityItem(
+                      iconAsset: 'assets/images/speciality_general.png',
+                      specializationsData: specializationDataList[index],
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],

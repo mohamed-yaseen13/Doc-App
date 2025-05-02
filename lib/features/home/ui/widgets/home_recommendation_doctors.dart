@@ -1,10 +1,15 @@
 import 'package:doc_app/core/theming/app_text_styles.dart';
+import 'package:doc_app/features/home/data/models/home_response_model.dart';
 import 'package:doc_app/features/home/ui/widgets/home_recommendation_doctor_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeRecommendationDoctors extends StatelessWidget {
-  const HomeRecommendationDoctors({super.key});
+  final List<SpecializationsData?> specializationDataList;
+  const HomeRecommendationDoctors({
+    super.key,
+    required this.specializationDataList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,33 +39,21 @@ class HomeRecommendationDoctors extends StatelessWidget {
             children: [
               SizedBox(
                 height: 200.h,
-                child: ListView(
-                  children: [
-                    HomeRecommendationDoctorItem(
-                      imageAsset:
-                          "assets/images/recommendation_doctor_randy.png",
-                      name: "Dr. Randy Wigham",
-                      describtion: "General | RSUD Gatot Subroto",
-                    ),
-                    HomeRecommendationDoctorItem(
-                      imageAsset:
-                          "assets/images/recommendation_doctor_randy.png",
-                      name: "Dr. Randy Wigham",
-                      describtion: "General | RSUD Gatot Subroto",
-                    ),
-                    HomeRecommendationDoctorItem(
-                      imageAsset:
-                          "assets/images/recommendation_doctor_randy.png",
-                      name: "Dr. Randy Wigham",
-                      describtion: "General | RSUD Gatot Subroto",
-                    ),
-                    HomeRecommendationDoctorItem(
-                      imageAsset:
-                          "assets/images/recommendation_doctor_randy.png",
-                      name: "Dr. Randy Wigham",
-                      describtion: "General | RSUD Gatot Subroto",
-                    ),
-                  ],
+                child: ListView.builder(
+                  itemCount: specializationDataList.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        HomeRecommendationDoctorItem(
+                          imageAsset:
+                              "assets/images/recommendation_doctor_randy.png",
+                          doctorName: specializationDataList[index]?.name,
+                          decs:
+                              '${specializationDataList[index]?.doctorsList?.first?.name} | ${specializationDataList[index]?.doctorsList?.first?.city?.name}',
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
