@@ -8,4 +8,6 @@ class ApiConstants {
   static const String home = 'home/index';
 
   static const String allSpecializations = 'specialization/index';
+
+  static const String allDoctors = 'doctor/index';
 }
