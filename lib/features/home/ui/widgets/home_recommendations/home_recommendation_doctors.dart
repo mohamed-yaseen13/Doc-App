@@ -1,3 +1,5 @@
+import 'package:doc_app/core/helpers/extensions.dart';
+import 'package:doc_app/core/routing/app_routes.dart';
 import 'package:doc_app/core/theming/app_text_styles.dart';
 import 'package:doc_app/features/home/data/models/home_response_model.dart';
 import 'package:doc_app/features/home/ui/widgets/home_recommendations/home_recommendation_doctor_item.dart';
@@ -26,7 +28,9 @@ class HomeRecommendationDoctors extends StatelessWidget {
               ),
               Spacer(),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed(AppRoutes.doctors);
+                },
                 child: Text(
                   'See All',
                   style: AppTextStyles.font12MainBlue400Weight,

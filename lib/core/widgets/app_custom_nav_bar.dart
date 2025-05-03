@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SpecializationsNavBar extends StatelessWidget {
-  const SpecializationsNavBar({super.key});
+class AppCustomNavBar extends StatelessWidget {
+  final String title;
+  const AppCustomNavBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,7 @@ class SpecializationsNavBar extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: Text(
-              "Doctor Speciality",
-              style: AppTextStyles.font18Black600Weight,
-            ),
+            child: Text(title, style: AppTextStyles.font18Black600Weight),
           ),
           Align(
             alignment: Alignment.centerLeft,

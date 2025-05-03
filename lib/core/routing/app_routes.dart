@@ -8,4 +8,6 @@ class AppRoutes {
   static const String signupScreen = '/signupScreen';
 
   static const String specializations = '/specializations';
+
+  static const String doctors = '/doctors';
 }
