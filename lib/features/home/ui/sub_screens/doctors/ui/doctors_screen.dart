@@ -1,8 +1,8 @@
 import 'package:doc_app/core/helpers/spacing.dart';
 import 'package:doc_app/core/widgets/app_custom_nav_bar.dart';
+import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/doctors_bloc_builder.dart';
 import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/filter_doctor.dart';
 import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/search_doctor.dart';
-import 'package:doc_app/features/home/ui/widgets/home_recommendations/home_recommendation_doctor_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,12 +24,7 @@ class DoctorsScreen extends StatelessWidget {
                 Row(
                   children: [Expanded(child: SearchDoctor()), FilterDoctor()],
                 ),
-                verticalSpace(12),
-                HomeRecommendationDoctorItem(
-                  imageAsset: 'assets/images/recommendation_doctor_randy.png',
-                  decs: 'General | RSUD Gatot Subroto',
-                  doctorName: 'Dr. Randy Wigham',
-                ),
+                DoctorsBlocBuilder(),
               ],
             ),
           ),
