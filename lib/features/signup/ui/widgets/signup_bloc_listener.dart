@@ -30,7 +30,7 @@ class SignupBlocListener extends StatelessWidget {
             );
           case SignupSuccess(:final data):
             context.pop();
-            context.pushNamed(AppRoutes.homeScreen);
+            context.pushReplacementNamed(AppRoutes.homeScreen);
           case SignupFailure(error: final error):
             setupErrorState(context, error);
         }

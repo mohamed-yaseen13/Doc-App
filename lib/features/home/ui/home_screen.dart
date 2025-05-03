@@ -1,6 +1,7 @@
 import 'package:doc_app/features/home/ui/widgets/home_blue_stack.dart';
 import 'package:doc_app/features/home/ui/widgets/home_nav_bar.dart';
-import 'package:doc_app/features/home/ui/widgets/speciality_and_recommendation_bloc_builder.dart';
+import 'package:doc_app/features/home/ui/widgets/home_recommendations/recommendations_bloc_builder.dart';
+import 'package:doc_app/features/home/ui/widgets/home_specializations/speciality_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const HomeNavBar(),
                 const HomeBlueStack(),
-                const SpecialityAndRecommendationBlocBuilder(),
+                const SpecialityBlocBuilder(),
+                const RecommendationsBlocBuilder(),
               ],
             ),
           ),
