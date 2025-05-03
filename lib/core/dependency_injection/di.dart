@@ -3,6 +3,9 @@ import 'package:doc_app/core/networking/dio_factory.dart';
 import 'package:doc_app/features/home/data/apis/home_api_service.dart';
 import 'package:doc_app/features/home/data/repos/home_repo.dart';
 import 'package:doc_app/features/home/logic/cubit/home_cubit.dart';
+import 'package:doc_app/features/home/ui/sub_screens/specializations/data/apis/specializations_api_service.dart';
+import 'package:doc_app/features/home/ui/sub_screens/specializations/data/repos/specializations_repo.dart';
+import 'package:doc_app/features/home/ui/sub_screens/specializations/logic/cubit/specializations_cubit.dart';
 import 'package:doc_app/features/login/data/apis/login_api_service.dart';
 import 'package:doc_app/features/login/data/repos/login_repo.dart';
 import 'package:doc_app/features/login/logic/cubit/login_cubit.dart';
@@ -27,4 +30,14 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+
+  getIt.registerLazySingleton<SpecializationsApiService>(
+    () => SpecializationsApiService(dio),
+  );
+  getIt.registerLazySingleton<SpecializationsRepo>(
+    () => SpecializationsRepo(getIt()),
+  );
+  getIt.registerFactory<SpecializationsCubit>(
+    () => SpecializationsCubit(getIt()),
+  );
 }

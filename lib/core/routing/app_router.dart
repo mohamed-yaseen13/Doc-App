@@ -1,6 +1,7 @@
 import 'package:doc_app/core/dependency_injection/di.dart';
 import 'package:doc_app/core/routing/app_routes.dart';
 import 'package:doc_app/features/home/logic/cubit/home_cubit.dart';
+import 'package:doc_app/features/home/ui/sub_screens/specializations/logic/cubit/specializations_cubit.dart';
 import 'package:doc_app/features/home/ui/sub_screens/specializations/ui/specializations_screen.dart';
 import 'package:doc_app/features/home/ui/home_screen.dart';
 import 'package:doc_app/features/login/logic/cubit/login_cubit.dart';
@@ -47,7 +48,16 @@ class AppRouter {
         );
 
       case AppRoutes.specializations:
-        return MaterialPageRoute(builder: (_) => const SpecializationsScreen());
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) =>
+                        getIt<SpecializationsCubit>()
+                          ..emitSpecializationsStates(),
+                child: const SpecializationsScreen(),
+              ),
+        );
 
       default:
         return null;
