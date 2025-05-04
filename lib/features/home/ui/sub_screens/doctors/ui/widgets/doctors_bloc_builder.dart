@@ -18,7 +18,33 @@ class DoctorsBlocBuilder extends StatefulWidget {
 }
 
 class _DoctorsBlocBuilderState extends State<DoctorsBlocBuilder> {
+  String _searchQuery = '';
+  Set<String> _selectedSpecialties = {'All'};
+  List<Doctors?>? _originalDoctorsList = [];
   List<Doctors?>? _filteredDoctorsList = [];
+  bool _isFirstBuild = true;
+
+  void _updateDoctorsList() {
+    final filtered =
+        _originalDoctorsList?.where((doctor) {
+          final matchesName =
+              doctor?.name?.toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              ) ??
+              false;
+
+          final matchesSpecialty =
+              _selectedSpecialties.contains('All') ||
+              _selectedSpecialties.contains(doctor?.specialization?.name);
+
+          return matchesName && matchesSpecialty;
+        }).toList();
+
+    setState(() {
+      _filteredDoctorsList = filtered;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DoctorsCubit, DoctorsState>(
@@ -35,29 +61,33 @@ class _DoctorsBlocBuilderState extends State<DoctorsBlocBuilder> {
             );
 
           case DoctorsSuccess(:final data):
+            if (_isFirstBuild) {
+              _originalDoctorsList = data.doctorsList;
+              _filteredDoctorsList = List.from(data.doctorsList ?? []);
+              _isFirstBuild = false;
+            }
             return Column(
               children: [
                 Row(
                   children: [
                     Expanded(
                       child: SearchDoctor(
-                        doctorsList: data.doctorsList,
-                        onSearchResults: (filteredList) {
-                          setState(() {
-                            _filteredDoctorsList = filteredList;
-                          });
+                        onSearch: (searchQuery) {
+                          _searchQuery = searchQuery;
+                          _updateDoctorsList();
                         },
                       ),
                     ),
-                    FilterDoctor(),
+                    FilterDoctor(
+                      selectedSpecialities: _selectedSpecialties,
+                      onFilter: (selected) {
+                        _selectedSpecialties = selected;
+                        _updateDoctorsList();
+                      },
+                    ),
                   ],
                 ),
-                AllDoctors(
-                  doctorsList:
-                      _filteredDoctorsList!.isNotEmpty
-                          ? _filteredDoctorsList
-                          : data.doctorsList,
-                ),
+                AllDoctors(doctorsList: _filteredDoctorsList),
               ],
             );
           case DoctorsFailure(error: final error):
