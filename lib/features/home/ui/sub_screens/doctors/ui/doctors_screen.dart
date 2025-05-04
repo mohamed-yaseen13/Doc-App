@@ -1,8 +1,6 @@
 import 'package:doc_app/core/helpers/spacing.dart';
 import 'package:doc_app/core/widgets/app_custom_nav_bar.dart';
 import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/doctors_bloc_builder.dart';
-import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/filter_doctor.dart';
-import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/search_doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,9 +19,6 @@ class DoctorsScreen extends StatelessWidget {
               children: [
                 const AppCustomNavBar(title: 'Recommendation Doctor'),
                 verticalSpace(12),
-                Row(
-                  children: [Expanded(child: SearchDoctor()), FilterDoctor()],
-                ),
                 DoctorsBlocBuilder(),
               ],
             ),

@@ -1,15 +1,24 @@
 import 'package:doc_app/core/helpers/extensions.dart';
 import 'package:doc_app/core/theming/app_colors.dart';
 import 'package:doc_app/core/theming/app_text_styles.dart';
+import 'package:doc_app/features/home/ui/sub_screens/doctors/data/models/doctors_response_model.dart';
 import 'package:doc_app/features/home/ui/sub_screens/doctors/logic/cubit/doctors_cubit.dart';
 import 'package:doc_app/features/home/ui/sub_screens/doctors/logic/cubit/doctors_state.dart';
 import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/all_doctors.dart';
+import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/filter_doctor.dart';
+import 'package:doc_app/features/home/ui/sub_screens/doctors/ui/widgets/search_doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DoctorsBlocBuilder extends StatelessWidget {
+class DoctorsBlocBuilder extends StatefulWidget {
   const DoctorsBlocBuilder({super.key});
 
+  @override
+  State<DoctorsBlocBuilder> createState() => _DoctorsBlocBuilderState();
+}
+
+class _DoctorsBlocBuilderState extends State<DoctorsBlocBuilder> {
+  List<Doctors?>? _filteredDoctorsList = [];
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DoctorsCubit, DoctorsState>(
@@ -26,9 +35,31 @@ class DoctorsBlocBuilder extends StatelessWidget {
             );
 
           case DoctorsSuccess(:final data):
-            var doctorsList = data.doctorsList;
-            return AllDoctors(doctorsList: doctorsList);
-
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: SearchDoctor(
+                        doctorsList: data.doctorsList,
+                        onSearchResults: (filteredList) {
+                          setState(() {
+                            _filteredDoctorsList = filteredList;
+                          });
+                        },
+                      ),
+                    ),
+                    FilterDoctor(),
+                  ],
+                ),
+                AllDoctors(
+                  doctorsList:
+                      _filteredDoctorsList!.isNotEmpty
+                          ? _filteredDoctorsList
+                          : data.doctorsList,
+                ),
+              ],
+            );
           case DoctorsFailure(error: final error):
             setupErrorState(context, error);
             return const Center(child: Text('An error occurred'));
