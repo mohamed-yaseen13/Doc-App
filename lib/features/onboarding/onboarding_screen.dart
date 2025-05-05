@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
                       AppCustomButton(
                         textButton: 'Get Started',
                         onPresssed: () {
-                          context.pushNamed(AppRoutes.loginScreen);
+                          context.pushNamed(AppRoutes.signupScreen);
                         },
                       ),
                     ],

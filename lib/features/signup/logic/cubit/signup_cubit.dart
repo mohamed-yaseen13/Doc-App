@@ -1,4 +1,6 @@
+import 'package:doc_app/core/helpers/shared_pref.dart';
 import 'package:doc_app/core/networking/api_result.dart';
+import 'package:doc_app/core/networking/dio_factory.dart';
 import 'package:doc_app/features/signup/data/models/signup_request_body.dart';
 import 'package:doc_app/features/signup/data/repos/signup_repo.dart';
 import 'package:doc_app/features/signup/logic/cubit/signup_state.dart';
@@ -25,9 +27,15 @@ class SignupCubit extends Cubit<SignupState> {
 
     switch (response) {
       case Success(:final data):
+        await saveUserToken(data.signupData!.token ?? '');
         emit(SignupState.signupSuccess(data));
       case Failure(:final msg):
         emit(SignupState.signupFailure(error: msg));
     }
+  }
+
+  Future<void> saveUserToken(String token) async {
+    await SharedPref.setSecuredString(SharedPref.userToken, token);
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 }

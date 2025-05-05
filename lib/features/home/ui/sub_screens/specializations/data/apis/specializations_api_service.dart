@@ -11,7 +11,5 @@ abstract class SpecializationsApiService {
       _SpecializationsApiService;
 
   @GET(ApiConstants.allSpecializations)
-  Future<SpecializationsResponseModel> getAllSpecializations(
-    @Header('Authorization') String AUTH_TOKEN,
-  );
+  Future<SpecializationsResponseModel> getAllSpecializations();
 }

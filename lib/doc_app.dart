@@ -1,3 +1,4 @@
+import 'package:doc_app/core/helpers/shared_pref.dart';
 import 'package:doc_app/core/routing/app_routes.dart';
 import 'package:doc_app/core/routing/app_router.dart';
 import 'package:doc_app/core/theming/app_colors.dart';
@@ -20,7 +21,10 @@ class DocApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.homeScreen,
+        initialRoute:
+            SharedPref.isUserLoggedIn
+                ? AppRoutes.homeScreen
+                : AppRoutes.onboardingScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

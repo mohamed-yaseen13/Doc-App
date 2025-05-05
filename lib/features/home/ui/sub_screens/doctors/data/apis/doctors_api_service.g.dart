@@ -20,11 +20,10 @@ class _DoctorsApiService implements DoctorsApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<DoctorsResponseModel> getAllDoctors(String AUTH_TOKEN) async {
+  Future<DoctorsResponseModel> getAllDoctors() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': AUTH_TOKEN};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<DoctorsResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)

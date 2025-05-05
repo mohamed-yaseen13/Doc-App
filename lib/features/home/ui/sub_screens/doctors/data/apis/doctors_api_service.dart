@@ -10,7 +10,5 @@ abstract class DoctorsApiService {
   factory DoctorsApiService(Dio dio, {String baseUrl}) = _DoctorsApiService;
 
   @GET(ApiConstants.allDoctors)
-  Future<DoctorsResponseModel> getAllDoctors(
-    @Header('Authorization') String AUTH_TOKEN,
-  );
+  Future<DoctorsResponseModel> getAllDoctors();
 }
